@@ -1,5 +1,7 @@
 package com.bituan.country_currency_and_exchange_api.model;
 
+import com.bituan.country_currency_and_exchange_api.entity.CountryEntity;
+
 import java.time.Instant;
 
 public class CountryModel {
@@ -15,6 +17,19 @@ public class CountryModel {
     private Instant lastRefreshedAt;
 
     public CountryModel() {}
+
+    public CountryModel (CountryEntity country) {
+        this.id = country.getId();
+        this.name = country.getName();
+        this.capital = country.getCapital();
+        this.region = country.getRegion();
+        this.population = country.getPopulation();
+        this.currencyCode = country.getCurrencyCode();
+        this.exchangeRate = country.getExchangeRate();
+        this.estimatedGdp = country.getEstimatedGdp();
+        this.flagUrl = country.getFlagUrl();
+        this.lastRefreshedAt = country.getLastRefreshedAt();
+    }
 
     public Long getId() {
         return id;
