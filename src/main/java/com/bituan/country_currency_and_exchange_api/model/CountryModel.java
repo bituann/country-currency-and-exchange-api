@@ -1,8 +1,7 @@
 package com.bituan.country_currency_and_exchange_api.model;
 
-import com.bituan.country_currency_and_exchange_api.entity.CountryEntity;
-
 import java.time.Instant;
+import java.util.List;
 
 public class CountryModel {
     private Long id;
@@ -10,26 +9,13 @@ public class CountryModel {
     private String capital;
     private String region;
     private Long population;
-    private String currencyCode;
+    private List<Currency> currencies;
     private Long exchangeRate;
     private Long estimatedGdp;
     private String flagUrl;
     private Instant lastRefreshedAt;
 
     public CountryModel() {}
-
-    public CountryModel (CountryEntity country) {
-        this.id = country.getId();
-        this.name = country.getName();
-        this.capital = country.getCapital();
-        this.region = country.getRegion();
-        this.population = country.getPopulation();
-        this.currencyCode = country.getCurrencyCode();
-        this.exchangeRate = country.getExchangeRate();
-        this.estimatedGdp = country.getEstimatedGdp();
-        this.flagUrl = country.getFlagUrl();
-        this.lastRefreshedAt = country.getLastRefreshedAt();
-    }
 
     public Long getId() {
         return id;
@@ -71,12 +57,12 @@ public class CountryModel {
         this.population = population;
     }
 
-    public String getCurrencyCode() {
-        return currencyCode;
+    public List<Currency> getCurrencies() {
+        return currencies;
     }
 
-    public void setCurrencyCode(String currencyCode) {
-        this.currencyCode = currencyCode;
+    public void setCurrencies(List<Currency> currencies) {
+        this.currencies = currencies;
     }
 
     public Long getExchangeRate() {
@@ -109,5 +95,37 @@ public class CountryModel {
 
     public void setLastRefreshedAt(Instant lastRefreshedAt) {
         this.lastRefreshedAt = lastRefreshedAt;
+    }
+}
+
+class Currency {
+    private String code;
+    private String name;
+    private String symbol;
+
+    public Currency() {}
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 }
