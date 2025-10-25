@@ -1,29 +1,19 @@
 package com.bituan.country_currency_and_exchange_api.model;
 
-import java.time.Instant;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CountryModel {
-    private Long id;
     private String name;
     private String capital;
     private String region;
     private Long population;
     private List<Currency> currencies;
-    private Long exchangeRate;
-    private Long estimatedGdp;
     private String flagUrl;
-    private Instant lastRefreshedAt;
 
     public CountryModel() {}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -65,36 +55,12 @@ public class CountryModel {
         this.currencies = currencies;
     }
 
-    public Long getExchangeRate() {
-        return exchangeRate;
-    }
-
-    public void setExchangeRate(Long exchangeRate) {
-        this.exchangeRate = exchangeRate;
-    }
-
-    public Long getEstimatedGdp() {
-        return estimatedGdp;
-    }
-
-    public void setEstimatedGdp(Long estimatedGdp) {
-        this.estimatedGdp = estimatedGdp;
-    }
-
     public String getFlagUrl() {
         return flagUrl;
     }
 
     public void setFlagUrl(String flagUrl) {
         this.flagUrl = flagUrl;
-    }
-
-    public Instant getLastRefreshedAt() {
-        return lastRefreshedAt;
-    }
-
-    public void setLastRefreshedAt(Instant lastRefreshedAt) {
-        this.lastRefreshedAt = lastRefreshedAt;
     }
 }
 
