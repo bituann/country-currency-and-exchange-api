@@ -23,4 +23,8 @@ public class CountryService {
     public CountryEntity getCountryByName (String name) {
         return countryRepository.findByName(name);
     }
+
+    public void deleteCountry (String name) {
+        countryRepository.deleteByName(name);
+    }
 }
