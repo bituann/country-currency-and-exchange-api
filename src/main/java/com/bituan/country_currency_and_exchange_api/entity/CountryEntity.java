@@ -1,13 +1,14 @@
 package com.bituan.country_currency_and_exchange_api.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.Instant;
 
 @Entity
 @Table(name = "countries")
 public class CountryEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String capital;
