@@ -19,4 +19,8 @@ public class CountryService {
     public List<CountryEntity> getAllCountries () {
         return countryRepository.findAll();
     }
+
+    public CountryEntity getCountryByName (String name) {
+        return countryRepository.findByName(name);
+    }
 }
