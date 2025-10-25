@@ -2,7 +2,6 @@ package com.bituan.country_currency_and_exchange_api.service;
 
 import com.bituan.country_currency_and_exchange_api.model.CountryModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,7 +14,7 @@ public class RestCountriesApiService {
         RestTemplate restTemplate = new RestTemplate();
         String restCountriesUrl = "https://restcountries.com/v2/all?fields=name,capital,region,population,flag,currencies";
 
-        ResponseEntity<Response> response = restTemplate.getForEntity(restCountriesUrl, Response.class);
+        ResponseEntity<RCResponse> response = restTemplate.getForEntity(restCountriesUrl, RCResponse.class);
 
         if (response.getStatusCode() == HttpStatus.OK) {
             return response.getBody().getResponse();
@@ -25,7 +24,7 @@ public class RestCountriesApiService {
     }
 }
 
-class Response {
+class RCResponse {
     private List<CountryModel> response;
 
     public List<CountryModel> getResponse() {
