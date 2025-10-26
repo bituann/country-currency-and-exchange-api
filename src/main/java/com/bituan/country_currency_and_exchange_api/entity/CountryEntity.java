@@ -2,6 +2,7 @@ package com.bituan.country_currency_and_exchange_api.entity;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 
 @Entity
@@ -15,8 +16,8 @@ public class CountryEntity {
     private String region;
     private Long population;
     private String currencyCode;
-    private Long exchangeRate;
-    private Long estimatedGdp;
+    private Double exchangeRate;
+    private Double estimatedGdp;
     private String flagUrl;
     private Instant lastRefreshedAt;
 
@@ -68,19 +69,19 @@ public class CountryEntity {
         this.currencyCode = currencyCode;
     }
 
-    public Long getExchangeRate() {
+    public Double getExchangeRate() {
         return exchangeRate;
     }
 
-    public void setExchangeRate(Long exchangeRate) {
+    public void setExchangeRate(Double exchangeRate) {
         this.exchangeRate = exchangeRate;
     }
 
-    public Long getEstimatedGdp() {
+    public Double getEstimatedGdp() {
         return estimatedGdp;
     }
 
-    public void setEstimatedGdp(Long estimatedGdp) {
+    public void setEstimatedGdp(Double estimatedGdp) {
         this.estimatedGdp = estimatedGdp;
     }
 
