@@ -39,6 +39,9 @@ public class CountryController {
 
         List<CountryEntity> newCountries = new ArrayList<>();
 
+        // define timestamp
+        Instant timestamp = Instant.now();
+
         for (CountryModel country : countries) {
             CountryEntity countryEntity = new CountryEntity();
 
@@ -52,12 +55,12 @@ public class CountryController {
             countryEntity.setRegion(country.getRegion());
             countryEntity.setPopulation(country.getPopulation());
             countryEntity.setFlagUrl(country.getFlag());
+            countryEntity.setLastRefreshedAt(timestamp);
 
             if (country.getCurrencies() == null) {
                 countryEntity.setCurrencyCode(null);
                 countryEntity.setExchangeRate(null);
                 countryEntity.setEstimatedGdp((double) 0);
-                countryEntity.setLastRefreshedAt(Instant.now());
 
                 newCountries.add(countryEntity);
                 continue;
@@ -69,7 +72,6 @@ public class CountryController {
             if (!exchangeRate.containsKey(currencyCode)) {
                 countryEntity.setExchangeRate(null);
                 countryEntity.setEstimatedGdp(null);
-                countryEntity.setLastRefreshedAt(Instant.now());
 
                 newCountries.add(countryEntity);
                 continue;
@@ -85,8 +87,6 @@ public class CountryController {
             //convert estimated Gdp to 2dp
             Double oneDpEstGdp = Double.valueOf("%.1f".formatted(estGdp));
             countryEntity.setEstimatedGdp(oneDpEstGdp);
-
-            countryEntity.setLastRefreshedAt(Instant.now());
 
             newCountries.add(countryEntity);
         }
