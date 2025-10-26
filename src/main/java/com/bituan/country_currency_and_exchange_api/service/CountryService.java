@@ -26,6 +26,10 @@ public class CountryService {
         countryRepository.save(country);
     }
 
+    public void addCountries (List<CountryEntity> countries) {
+        countryRepository.saveAll(countries);
+    }
+
     public List<CountryEntity> getAllCountries () {
         return countryRepository.findAll();
     }
