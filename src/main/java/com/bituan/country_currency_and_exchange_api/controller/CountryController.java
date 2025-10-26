@@ -9,10 +9,8 @@ import com.bituan.country_currency_and_exchange_api.service.RestCountriesApiServ
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,15 +43,15 @@ public class CountryController {
             CountryEntity countryEntity = new CountryEntity();
 
             //if country exists, set id so DB updates instead of inserts
-            if (countryService.countryExists(country.getName().toLowerCase())) {
+            if (countryService.countryExists(country.getName())) {
                 countryEntity.setId(countryService.getCountryByName(country.getName()).getId());
             }
 
-            countryEntity.setName(country.getName().toLowerCase());
+            countryEntity.setName(country.getName());
             countryEntity.setCapital(country.getCapital());
             countryEntity.setRegion(country.getRegion());
             countryEntity.setPopulation(country.getPopulation());
-            countryEntity.setFlagUrl(country.getFlagUrl());
+            countryEntity.setFlagUrl(country.getFlag());
 
             if (country.getCurrencies() == null) {
                 countryEntity.setCurrencyCode(null);
@@ -100,22 +98,22 @@ public class CountryController {
 
     @GetMapping("/countries/{name}")
     public ResponseEntity<CountryEntity> getCountry (@PathVariable String name) throws HttpException {
-        if (!countryService.countryExists(name.toLowerCase())) {
+        if (!countryService.countryExists(name)) {
             throw new HttpException(HttpStatus.NOT_FOUND, "Country not found", null);
         }
 
-        CountryEntity country = countryService.getCountryByName(name.toLowerCase());
+        CountryEntity country = countryService.getCountryByName(name);
         return ResponseEntity.ok(country);
     }
 
     @DeleteMapping("/countries/{name}")
     public ResponseEntity<String> deleteCountry (@PathVariable String name) throws HttpException {
 
-        if (!countryService.countryExists(name.toLowerCase())) {
+        if (!countryService.countryExists(name)) {
             throw new HttpException(HttpStatus.NOT_FOUND, "Country not found", null);
         }
 
-        countryService.deleteCountry(name.toLowerCase());
+        countryService.deleteCountry(name);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
