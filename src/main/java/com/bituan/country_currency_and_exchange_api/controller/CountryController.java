@@ -81,7 +81,9 @@ public class CountryController {
             Double twoDpExchangeRate = Double.valueOf("%.2f".formatted(exchangeRate.get(currencyCode)));
             countryEntity.setExchangeRate(twoDpExchangeRate);
 
-            Double randomNum = new Random().nextDouble(2000-1000+1) + 1000;
+            int min = 1000;
+            int max = 2000;
+            Double randomNum = new Random().nextDouble(max - min + 1) + min;
             Double estGdp = countryEntity.getPopulation() * randomNum / countryEntity.getExchangeRate();
 
             //convert estimated Gdp to 2dp
