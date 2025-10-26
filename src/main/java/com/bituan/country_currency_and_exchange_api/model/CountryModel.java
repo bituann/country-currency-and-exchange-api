@@ -12,7 +12,7 @@ public class CountryModel {
     private String region;
     private Long population;
     private List<Map<String, String>> currencies;
-    private String flagUrl;
+    private String flag;
 
     public CountryModel() {}
 
@@ -56,11 +56,11 @@ public class CountryModel {
         this.currencies = currencies;
     }
 
-    public String getFlagUrl() {
-        return flagUrl;
+    public String getFlag() {
+        return flag;
     }
 
-    public void setFlagUrl(String flagUrl) {
-        this.flagUrl = flagUrl;
+    public void setFlag(String flag) {
+        this.flag = flag;
     }
 }
