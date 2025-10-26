@@ -10,6 +10,6 @@ public interface CountryRepository extends JpaRepository<CountryEntity, Long> {
     void deleteByName (String name);
     boolean existsByName (String name);
     CountryEntity findFirstBy();
-    List<CountryEntity> findAllOrderByGdpDesc();
-    List<CountryEntity> findAllOrderByGdpAsc();
+    List<CountryEntity> findAllByOrderByEstimatedGdpDesc();
+    List<CountryEntity> findAllByOrderByEstimatedGdpAsc();
 }
