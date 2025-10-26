@@ -6,13 +6,13 @@ import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ErResponseModel {
-    private Map<String, Integer> rates;
+    private Map<String, Double> rates;
 
-    public Map<String, Integer> getRates() {
+    public Map<String, Double> getRates() {
         return rates;
     }
 
-    public void setRates(Map<String, Integer> rates) {
+    public void setRates(Map<String, Double> rates) {
         this.rates = rates;
     }
 }
