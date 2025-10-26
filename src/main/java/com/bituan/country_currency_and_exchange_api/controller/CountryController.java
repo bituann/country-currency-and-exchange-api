@@ -3,6 +3,7 @@ package com.bituan.country_currency_and_exchange_api.controller;
 import com.bituan.country_currency_and_exchange_api.entity.CountryEntity;
 import com.bituan.country_currency_and_exchange_api.exception.HttpException;
 import com.bituan.country_currency_and_exchange_api.model.CountryModel;
+import com.bituan.country_currency_and_exchange_api.model.StatusResponseModel;
 import com.bituan.country_currency_and_exchange_api.service.CountryService;
 import com.bituan.country_currency_and_exchange_api.service.ExchangeRateAPIService;
 import com.bituan.country_currency_and_exchange_api.service.RestCountriesApiService;
@@ -106,6 +107,16 @@ public class CountryController {
 
         CountryEntity country = countryService.getCountryByName(name);
         return ResponseEntity.ok(country);
+    }
+
+    @GetMapping("/countries/status")
+    public ResponseEntity<StatusResponseModel> getStatus () {
+        StatusResponseModel response = new StatusResponseModel();
+
+        response.setTotalCountries(countryService.countTotalRows());
+        response.setLastRefreshedAt(countryService.findFirst().getLastRefreshedAt());
+
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/countries/{name}")
