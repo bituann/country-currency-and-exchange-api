@@ -21,7 +21,7 @@ public class FilterParamModel {
     }
 
     public void setCurrency(String currency) {
-        this.currency = currency;
+        this.currency = currency.toUpperCase();
     }
 
     public Double getGdp() {
