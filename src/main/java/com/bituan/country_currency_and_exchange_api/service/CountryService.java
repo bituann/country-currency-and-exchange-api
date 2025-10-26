@@ -1,10 +1,12 @@
 package com.bituan.country_currency_and_exchange_api.service;
 
 import com.bituan.country_currency_and_exchange_api.entity.CountryEntity;
+import com.bituan.country_currency_and_exchange_api.exception.HttpException;
 import com.bituan.country_currency_and_exchange_api.model.CountryModel;
 import com.bituan.country_currency_and_exchange_api.repository.CountryRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,5 +52,16 @@ public class CountryService {
 
     public CountryEntity findFirst () {
         return countryRepository.findFirstBy();
+    }
+
+    public List<CountryEntity> getSortedList(String sortBy) throws HttpException {
+        switch (sortBy) {
+            case "gdp_desc":
+                return countryRepository.findAllOrderByGdpDesc();
+            case "gdp_asc":
+                return countryRepository.findAllOrderByGdpAsc();
+        }
+
+        throw new HttpException(HttpStatus.BAD_REQUEST, "Validation failed", null);
     }
 }
