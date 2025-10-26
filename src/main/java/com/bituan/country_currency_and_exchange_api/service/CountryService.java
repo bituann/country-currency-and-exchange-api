@@ -43,4 +43,8 @@ public class CountryService {
     public void deleteCountry (String name) {
         countryRepository.deleteByName(name);
     }
+
+    public long countTotalRows () {
+        return countryRepository.count();
+    }
 }
