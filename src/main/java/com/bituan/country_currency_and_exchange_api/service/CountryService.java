@@ -2,7 +2,6 @@ package com.bituan.country_currency_and_exchange_api.service;
 
 import com.bituan.country_currency_and_exchange_api.entity.CountryEntity;
 import com.bituan.country_currency_and_exchange_api.exception.HttpException;
-import com.bituan.country_currency_and_exchange_api.model.CountryModel;
 import com.bituan.country_currency_and_exchange_api.repository.CountryRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +55,8 @@ public class CountryService {
 
     public List<CountryEntity> getSortedList(String sortBy) throws HttpException {
         return switch (sortBy) {
-            case "gdp_desc" -> countryRepository.findAllOrderByGdpDesc();
-            case "gdp_asc" -> countryRepository.findAllOrderByGdpAsc();
+            case "gdp_desc" -> countryRepository.findAllByOrderByEstimatedGdpDesc();
+            case "gdp_asc" -> countryRepository.findAllByOrderByEstimatedGdpAsc();
             default -> throw new HttpException(HttpStatus.BAD_REQUEST, "Validation failed", null);
         };
 
