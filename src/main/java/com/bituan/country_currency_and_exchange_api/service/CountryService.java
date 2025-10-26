@@ -18,6 +18,10 @@ public class CountryService {
         this.countryRepository = countryRepository;
     }
 
+    public boolean countryExists (String name) {
+        return countryRepository.existsByName(name);
+    }
+
     public void addCountry (CountryEntity country) {
         countryRepository.save(country);
     }
