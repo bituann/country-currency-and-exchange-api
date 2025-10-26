@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 
 @Service
-public class ExchangeRateAPI {
+public class ExchangeRateAPIService {
     public Map<String, Integer> getExchangeRates () {
         RestTemplate restTemplate = new RestTemplate();
         String exchangeRateUrl = "https://open.er-api.com/v6/latest/USD";
