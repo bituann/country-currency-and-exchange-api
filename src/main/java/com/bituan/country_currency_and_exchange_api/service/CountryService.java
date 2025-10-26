@@ -55,13 +55,11 @@ public class CountryService {
     }
 
     public List<CountryEntity> getSortedList(String sortBy) throws HttpException {
-        switch (sortBy) {
-            case "gdp_desc":
-                return countryRepository.findAllOrderByGdpDesc();
-            case "gdp_asc":
-                return countryRepository.findAllOrderByGdpAsc();
-        }
+        return switch (sortBy) {
+            case "gdp_desc" -> countryRepository.findAllOrderByGdpDesc();
+            case "gdp_asc" -> countryRepository.findAllOrderByGdpAsc();
+            default -> throw new HttpException(HttpStatus.BAD_REQUEST, "Validation failed", null);
+        };
 
-        throw new HttpException(HttpStatus.BAD_REQUEST, "Validation failed", null);
     }
 }
