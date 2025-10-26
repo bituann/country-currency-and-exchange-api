@@ -47,4 +47,8 @@ public class CountryService {
     public long countTotalRows () {
         return countryRepository.count();
     }
+
+    public CountryEntity findFirst () {
+        return countryRepository.findFirstBy();
+    }
 }
