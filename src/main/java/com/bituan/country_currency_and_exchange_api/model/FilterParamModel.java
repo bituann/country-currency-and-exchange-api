@@ -3,7 +3,7 @@ package com.bituan.country_currency_and_exchange_api.model;
 public class FilterParamModel {
     private String region;
     private String currency;
-    private Long gdp;
+    private Double gdp;
     private String sortBy;
 
     public FilterParamModel() {}
@@ -24,12 +24,12 @@ public class FilterParamModel {
         this.currency = currency;
     }
 
-    public Long getGdp() {
+    public Double getGdp() {
         return gdp;
     }
 
-    public void setGdp(Long gdp) {
-        this.gdp = gdp;
+    public void setGdp(Double gdp) {
+        this.gdp = Double.valueOf("%.1f".formatted(gdp));
     }
 
     public String getSortBy() {
