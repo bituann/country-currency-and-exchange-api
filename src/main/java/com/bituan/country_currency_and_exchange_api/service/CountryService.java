@@ -4,9 +4,11 @@ import com.bituan.country_currency_and_exchange_api.entity.CountryEntity;
 import com.bituan.country_currency_and_exchange_api.model.CountryModel;
 import com.bituan.country_currency_and_exchange_api.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CountryService {
 
     private final CountryRepository countryRepository;
