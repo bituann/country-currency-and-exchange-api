@@ -3,6 +3,7 @@ package com.bituan.country_currency_and_exchange_api.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CountryModel {
@@ -10,7 +11,7 @@ public class CountryModel {
     private String capital;
     private String region;
     private Long population;
-    private List<Currency> currencies;
+    private List<Map<String, String>> currencies;
     private String flagUrl;
 
     public CountryModel() {}
@@ -47,11 +48,11 @@ public class CountryModel {
         this.population = population;
     }
 
-    public List<Currency> getCurrencies() {
+    public List<Map<String, String>> getCurrencies() {
         return currencies;
     }
 
-    public void setCurrencies(List<Currency> currencies) {
+    public void setCurrencies(List<Map<String, String>> currencies) {
         this.currencies = currencies;
     }
 
@@ -61,37 +62,5 @@ public class CountryModel {
 
     public void setFlagUrl(String flagUrl) {
         this.flagUrl = flagUrl;
-    }
-}
-
-class Currency {
-    private String code;
-    private String name;
-    private String symbol;
-
-    public Currency() {}
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
     }
 }
