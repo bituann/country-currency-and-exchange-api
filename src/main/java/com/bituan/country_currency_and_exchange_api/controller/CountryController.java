@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -19,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-@Controller
+@RestController
 public class CountryController {
 
     private final CountryService countryService;
@@ -45,11 +48,11 @@ public class CountryController {
             CountryEntity countryEntity = new CountryEntity();
 
             //if country exists, set id so DB updates instead of inserts
-            if (countryService.countryExists(country.getName())) {
+            if (countryService.countryExists(country.getName().toLowerCase())) {
                 countryEntity.setId(countryService.getCountryByName(country.getName()).getId());
             }
 
-            countryEntity.setName(country.getName());
+            countryEntity.setName(country.getName().toLowerCase());
             countryEntity.setCapital(country.getCapital());
             countryEntity.setRegion(country.getRegion());
             countryEntity.setPopulation(country.getPopulation());
@@ -94,6 +97,18 @@ public class CountryController {
         }
 
         countryService.addCountries(newCountries);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/countries/{name}")
+    public ResponseEntity<String> deleteCountry (@PathVariable String name) throws HttpException {
+
+        if (!countryService.countryExists(name.toLowerCase())) {
+            throw new HttpException(HttpStatus.NOT_FOUND, "Country not found", null);
+        }
+
+        countryService.deleteCountry(name.toLowerCase());
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
