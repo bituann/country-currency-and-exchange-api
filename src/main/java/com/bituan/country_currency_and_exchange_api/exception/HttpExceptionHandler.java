@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class HttpExceptionHandler {
     @ExceptionHandler(HttpException.class)
-    public ResponseEntity<HttpExceptionMessageModel> handleException (HttpException exception) {
+    public ResponseEntity<HttpExceptionMessageModel> httpException(HttpException exception) {
         return ResponseEntity.status(exception.getStatus()).body(exception.getCustomMessage());
     }
 }
