@@ -7,4 +7,5 @@ public interface CountryRepository extends JpaRepository<CountryEntity, Long> {
     CountryEntity findByName (String name);
     void deleteByName (String name);
     boolean existsByName (String name);
+    CountryEntity findFirstBy();
 }
