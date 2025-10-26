@@ -1,5 +1,6 @@
 package com.bituan.country_currency_and_exchange_api.service;
 
+import com.bituan.country_currency_and_exchange_api.exception.HttpException;
 import com.bituan.country_currency_and_exchange_api.model.CountryModel;
 import com.bituan.country_currency_and_exchange_api.model.RcResponseModel;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Service
 public class RestCountriesApiService {
-    public List<CountryModel> getCountries () {
+    public List<CountryModel> getCountries () throws HttpException {
         RestTemplate restTemplate = new RestTemplate();
         String restCountriesUrl = "https://restcountries.com/v2/all?fields=name,capital,region,population,flag,currencies";
 
@@ -21,6 +22,6 @@ public class RestCountriesApiService {
             return response.getBody().getResponse();
         }
 
-        return null;
+        throw new HttpException(HttpStatus.valueOf(503), "External data source unavailable", "Could not fetch data from restcountries");
     }
 }
