@@ -3,6 +3,7 @@ package com.bituan.country_currency_and_exchange_api.service;
 import com.bituan.country_currency_and_exchange_api.entity.CountryEntity;
 import com.bituan.country_currency_and_exchange_api.model.CountryModel;
 import com.bituan.country_currency_and_exchange_api.repository.CountryRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,7 @@ public class CountryService {
         return countryRepository.findByName(name);
     }
 
+    @Transactional
     public void deleteCountry (String name) {
         countryRepository.deleteByName(name);
     }
