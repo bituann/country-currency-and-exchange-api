@@ -107,6 +107,22 @@ public class CountryController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/countries/image")
+    public ResponseEntity<?> getImage () throws HttpException {
+        Path path = Paths.get("summary.png");
+
+        if (Files.notExists(path)) {
+            throw new HttpException(HttpStatus.NOT_FOUND, "Summary image not found", null);
+        }
+
+        try {
+            Resource imageResource = new UrlResource(path.toUri());
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageResource);
+        } catch (MalformedURLException e) {
+            throw new HttpException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error", null);
+        }
+    }
+
     @GetMapping("/countries/{name}")
     public ResponseEntity<CountryEntity> getCountry (@PathVariable String name) throws HttpException {
         if (!countryService.countryExists(name)) {
