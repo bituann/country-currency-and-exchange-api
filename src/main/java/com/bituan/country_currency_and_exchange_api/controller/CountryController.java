@@ -148,7 +148,7 @@ public class CountryController {
 
         if (filters.getCurrency() != null) {
             countries = countries.stream()
-                    .filter(country -> country.getCurrencyCode().equals(filters.getCurrency()))
+                    .filter(country -> country.getCurrencyCode() != null && country.getCurrencyCode().equals(filters.getCurrency()))
                     .collect(Collectors.toList());
         }
 
