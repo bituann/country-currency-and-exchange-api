@@ -101,7 +101,7 @@ public class CountryController {
         countryService.deleteAllCountries();
         countryService.addCountries(newCountries);
 
-//        imageGenerationService.generateImage("Hello", "summary");
+        imageGenerationService.generateImage("Hello", "summary");
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
