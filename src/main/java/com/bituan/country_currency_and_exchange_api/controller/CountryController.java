@@ -7,12 +7,21 @@ import com.bituan.country_currency_and_exchange_api.model.FilterParamModel;
 import com.bituan.country_currency_and_exchange_api.model.StatusResponseModel;
 import com.bituan.country_currency_and_exchange_api.service.CountryService;
 import com.bituan.country_currency_and_exchange_api.service.ExchangeRateAPIService;
+import com.bituan.country_currency_and_exchange_api.service.ImageGenerationService;
 import com.bituan.country_currency_and_exchange_api.service.RestCountriesApiService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,13 +32,15 @@ public class CountryController {
     private final CountryService countryService;
     private final ExchangeRateAPIService exchangeRateAPIService;
     private final RestCountriesApiService restCountriesApiService;
+    private final ImageGenerationService imageGenerationService;
 
     @Autowired
     public CountryController (CountryService countryService, ExchangeRateAPIService exchangeRateAPIService,
-                       RestCountriesApiService restCountriesApiService) {
+                              RestCountriesApiService restCountriesApiService, ImageGenerationService imageGenerationService) {
         this.countryService = countryService;
         this.exchangeRateAPIService = exchangeRateAPIService;
         this.restCountriesApiService = restCountriesApiService;
+        this.imageGenerationService = imageGenerationService;
     }
 
     @PostMapping("/countries/refresh")
@@ -44,11 +55,6 @@ public class CountryController {
 
         for (CountryModel country : countries) {
             CountryEntity countryEntity = new CountryEntity();
-
-            //if country exists, set id so DB updates instead of inserts
-            if (countryService.countryExists(country.getName())) {
-                countryEntity.setId(countryService.getCountryByName(country.getName()).getId());
-            }
 
             countryEntity.setName(country.getName());
             countryEntity.setCapital(country.getCapital());
@@ -93,7 +99,10 @@ public class CountryController {
             newCountries.add(countryEntity);
         }
 
+        countryService.deleteAllCountries();
         countryService.addCountries(newCountries);
+
+        imageGenerationService.generateImage("Hello", "summary");
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
