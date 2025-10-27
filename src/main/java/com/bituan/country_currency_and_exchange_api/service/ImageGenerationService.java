@@ -27,8 +27,8 @@ public class ImageGenerationService {
 //        Font font = new Font("Arial", Font.BOLD, 30);
 //        graphics2D.setFont(font);
 
-        graphics2D.setColor(Color.BLACK);
-        graphics2D.drawString(string, 400, 200);
+//        graphics2D.setColor(Color.BLACK);
+//        graphics2D.drawString(string, 400, 200);
 
         graphics2D.dispose();
 
