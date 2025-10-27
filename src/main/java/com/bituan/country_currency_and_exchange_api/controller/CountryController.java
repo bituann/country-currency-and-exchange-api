@@ -133,7 +133,7 @@ public class CountryController {
     }
 
     @GetMapping("/countries")
-    public ResponseEntity<List<CountryEntity>> getCountries (@RequestParam("sort_by") String sortBy, FilterParamModel filters) throws HttpException {
+    public ResponseEntity<List<CountryEntity>> getCountries (@RequestParam(required = false, name = "sort_by") String sortBy, FilterParamModel filters) throws HttpException {
         List<CountryEntity> countries = countryService.getAllCountries();
 
         if (filters == null) {
