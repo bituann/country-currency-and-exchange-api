@@ -28,6 +28,7 @@ public class CountryService {
         countryRepository.save(country);
     }
 
+    @Transactional
     public void addCountries (List<CountryEntity> countries) {
         countryRepository.saveAll(countries);
     }
@@ -47,7 +48,7 @@ public class CountryService {
 
     @Transactional
     public void deleteAllCountries () {
-        countryRepository.deleteAll();
+        countryRepository.deleteAllInBatch();
     }
 
     public long countTotalRows () {
