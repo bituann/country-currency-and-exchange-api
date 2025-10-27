@@ -170,7 +170,7 @@ public class CountryController {
         return ResponseEntity.ok(countries);
     }
 
-    @GetMapping("/countries/status")
+    @GetMapping("/status")
     public ResponseEntity<StatusResponseModel> getStatus () {
         StatusResponseModel response = new StatusResponseModel();
 
