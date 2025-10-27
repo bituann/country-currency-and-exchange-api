@@ -139,7 +139,7 @@ public class CountryController {
             List<CountryEntity> countriesSorted = countryService.getSortedList(sortBy);
 
             Set<CountryEntity> countriesSet = new HashSet<>(countries);
-            countriesSorted = countriesSorted.stream().filter(country -> countriesSet.contains(country)).toList();
+            countriesSorted = countriesSorted.stream().filter(countriesSet::contains).toList();
             countries = countriesSorted;
         }
 
