@@ -133,7 +133,7 @@ public class CountryController {
     }
 
     @GetMapping("/countries")
-    public ResponseEntity<List<CountryEntity>> getCountries (FilterParamModel filters) throws HttpException {
+    public ResponseEntity<List<CountryEntity>> getCountries (@RequestParam("sort_by") String sortBy, FilterParamModel filters) throws HttpException {
         List<CountryEntity> countries = countryService.getAllCountries();
 
         if (filters == null) {
@@ -158,8 +158,7 @@ public class CountryController {
                     .collect(Collectors.toList());
         }
 
-        if (filters.getSortBy() != null) {
-            String sortBy = filters.getSortBy();
+        if (sortBy != null) {
             List<CountryEntity> countriesSorted = countryService.getSortedList(sortBy);
 
             Set<CountryEntity> countriesSet = new HashSet<>(countries);
