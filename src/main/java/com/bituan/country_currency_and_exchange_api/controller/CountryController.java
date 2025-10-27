@@ -101,14 +101,14 @@ public class CountryController {
         countryService.deleteAllCountries();
         countryService.addCountries(newCountries);
 
-        imageGenerationService.generateImage("Hello", "summary");
+//        imageGenerationService.generateImage("Hello", "summary");
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/countries/image")
     public ResponseEntity<?> getImage () throws HttpException {
-        Path path = Paths.get("summary.png");
+        Path path = Paths.get("./summary.png");
 
         if (Files.notExists(path)) {
             throw new HttpException(HttpStatus.NOT_FOUND, "Summary image not found", null);
