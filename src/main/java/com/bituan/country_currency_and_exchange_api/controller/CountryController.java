@@ -3,6 +3,7 @@ package com.bituan.country_currency_and_exchange_api.controller;
 import com.bituan.country_currency_and_exchange_api.entity.CountryEntity;
 import com.bituan.country_currency_and_exchange_api.exception.HttpException;
 import com.bituan.country_currency_and_exchange_api.model.CountryModel;
+import com.bituan.country_currency_and_exchange_api.model.FilterParamModel;
 import com.bituan.country_currency_and_exchange_api.model.StatusResponseModel;
 import com.bituan.country_currency_and_exchange_api.service.CountryService;
 import com.bituan.country_currency_and_exchange_api.service.ExchangeRateAPIService;
@@ -13,10 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 public class CountryController {
@@ -107,6 +106,44 @@ public class CountryController {
 
         CountryEntity country = countryService.getCountryByName(name);
         return ResponseEntity.ok(country);
+    }
+
+    @GetMapping("/countries")
+    public ResponseEntity<List<CountryEntity>> getCountries (FilterParamModel filters) throws HttpException {
+        List<CountryEntity> countries = countryService.getAllCountries();
+
+        if (filters == null) {
+            return ResponseEntity.ok(countries);
+        }
+
+        if (filters.getRegion() != null) {
+            countries = countries.stream()
+                    .filter(country -> country.getRegion().equals(filters.getRegion()))
+                    .collect(Collectors.toList());
+        }
+
+        if (filters.getCurrency() != null) {
+            countries = countries.stream()
+                    .filter(country -> country.getCurrencyCode().equals(filters.getCurrency()))
+                    .collect(Collectors.toList());
+        }
+
+        if (filters.getGdp() != null) {
+            countries = countries.stream()
+                    .filter(country -> country.getEstimatedGdp().equals(filters.getGdp()))
+                    .collect(Collectors.toList());
+        }
+
+        if (filters.getSortBy() != null) {
+            String sortBy = filters.getSortBy();
+            List<CountryEntity> countriesSorted = countryService.getSortedList(sortBy);
+
+            Set<CountryEntity> countriesSet = new HashSet<>(countries);
+            countriesSorted = countriesSorted.stream().filter(country -> countriesSet.contains(country)).toList();
+            countries = countriesSorted;
+        }
+
+        return ResponseEntity.ok(countries);
     }
 
     @GetMapping("/countries/status")
