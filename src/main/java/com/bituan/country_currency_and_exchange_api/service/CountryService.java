@@ -45,6 +45,11 @@ public class CountryService {
         countryRepository.deleteByName(name);
     }
 
+    @Transactional
+    public void deleteAllCountries () {
+        countryRepository.deleteAll();
+    }
+
     public long countTotalRows () {
         return countryRepository.count();
     }
