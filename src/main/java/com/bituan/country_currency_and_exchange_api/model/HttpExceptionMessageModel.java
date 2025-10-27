@@ -1,8 +1,8 @@
 package com.bituan.country_currency_and_exchange_api.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class HttpExceptionMessageModel {
     private String error;
     private String details;
