@@ -4,7 +4,6 @@ public class FilterParamModel {
     private String region;
     private String currency;
     private Double gdp;
-    private String sortBy;
 
     public FilterParamModel() {}
 
@@ -30,13 +29,5 @@ public class FilterParamModel {
 
     public void setGdp(Double gdp) {
         this.gdp = Double.valueOf("%.1f".formatted(gdp));
-    }
-
-    public String getSortBy() {
-        return sortBy;
-    }
-
-    public void setSortBy(String sortBy) {
-        this.sortBy = sortBy;
     }
 }
